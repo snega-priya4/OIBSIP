@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>KSP todolist</title>
+    <link rel="icon" href="Capture.JPG">
+    <style>
+
+body{
+    height: 100vh;
+    background: linear-gradient(135deg,#e6f632,#0aa071);
+}
+h1{
+    color: #0a279c;
+    text-align: center;
+    top: 0px;
+    font-size: 60px;
+    position: relative;
+}
+.container{
+    width: 40%;
+    min-width: 450px;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 30px;
+    padding: 30px 40px;
+}
+#newtask{
+    position: relative;
+    background-color: #f8efef;
+    padding: 30px 20px;
+    border-radius: 5px;
+}
+#newtask input{
+    width: 70%;
+    height: 45px;
+    font-family: 'Poppins',sans-serif;
+    font-size: 20px;
+    border: 2px solid #00050a;
+    padding: 12px;
+    color: #0c0000;
+    font-weight: 500;
+    position: relative;
+    border-radius: 5px;
+}
+#newtask input:focus{
+    outline: none;
+    border-color: #1d0338;
+}
+
+#newtask button{
+    position: relative;
+    float: right;
+    width: 20%;
+    height: 45px;
+    border-radius: 5px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    background-color: #eb3939;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+#tasks{
+    background-color:transparent;
+    padding: 30px 20px;
+    margin-top: 60px;
+    border-radius: 10px;
+    width: 100%;
+    position: relative;
+}
+.task{
+    background-color: #f8f4f4;
+    height: 50px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #022e44;
+    cursor: pointer;
+}
+.task span{
+    font-family: 'Poppins',sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+.task button{
+    background-color: #04000c;
+    color: #ffffff;
+    height: 100%;
+    width: 40px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+.completed{
+    text-decoration: line-through;
+}
+</style>
+
+</head>
+<body>
+    <div class="logo">
+        <img src="Capture.jpg" alt="SNEGA">
+    </div>
+    <div class="container">
+        <h1>TO-DO-LIST</h1>
+        <div id="newtask">
+            <input type="text" placeholder="Task to be done..">
+            <button id="push">Add</button>
+        </div>
+        <div id="tasks"></div>
+    </div>
+    
+    <script>
+        document.querySelector('#push').onclick = function(){
+            if(document.querySelector('#newtask input').value.length == 0){
+                alert("Please Enter a Task")
+            }
+            else{
+                document.querySelector('#tasks').innerHTML += `
+                    <div class="task">
+                        <span id="taskname">
+                            ${document.querySelector('#newtask input').value}
+                        </span>
+                        <button class="delete">X
+                        </button>
+                    </div>
+                `;
+        
+                var current_tasks = document.querySelectorAll(".delete");
+                for(var i=0; i<current_tasks.length; i++){
+                    current_tasks[i].onclick = function(){
+                        this.parentNode.remove();
+                    }
+                }
+        
+                var tasks = document.querySelectorAll(".task");
+                for(var i=0; i<tasks.length; i++){
+                    tasks[i].onclick = function(){
+                        this.classList.toggle('completed');
+                    }
+                }
+        
+                document.querySelector("#newtask input").value = "";
+            }
+        }
+    </script>
+</body>
+</html>
